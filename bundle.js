@@ -97,6 +97,10 @@ let bigBubble = new __WEBPACK_IMPORTED_MODULE_0__bubble_js__["a" /* default */](
   "green",
 );
 
+let bubbles = [];
+
+bubbles.push(smallBubble, bigBubble);
+
 // character
 let characterHeight = 30;
 let characterWidth = 25;
@@ -145,9 +149,9 @@ function draw() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawCharacter();
-  smallBubble.moveToNextPos(ctx, canvas);
-  bigBubble.moveToNextPos(ctx, canvas);
+  // bubbles.map(x => x.moveToNextPos(ctx, canvas));
 }
+
 
 setInterval(draw, 3);
 
