@@ -2,7 +2,7 @@
 
 ### Game Overview and Logic
 
-Rebubbled is a clone of the classic Bubble Trouble game, in which the character attempts to destroy all the perilous bubbles by shooting them with a dividing them into smaller components and eventually destroying them all together. If the character is touched by a bubble, the character loses a life (out of three). 
+Rebubbled is a clone of the classic Bubble Trouble game, in which the character attempts to destroy all the perilous bubbles by shooting them with a dividing them into smaller components and eventually destroying them all together. If the character is touched by a bubble, the character loses a life (out of three).
 
 ### Functionality & MVP  
 
@@ -14,49 +14,35 @@ Rebubbled is a clone of the classic Bubble Trouble game, in which the character 
 
 ### Wireframes
 
-Rebubbled will be a single-window game.
+Rebubbled will be a single-window game. The user will be able to move left and right with the keyboard's arrows. Pressing on the spacebar will allow the user to shoot at the bubbles. The user can only shoot another harpoon after the previous harpoon has hit the top of the game's window.
 
-![wireframes](js_wireframes.png)
+![rebubbled_wireframe](rebubbled_wireframe.png)
 
-### Architecture and Technologies
+### Timeline
 
-This project will be implemented with the following technologies:
-
-- `Vanilla JavaScript` for overall structure and game logic,
-- `HTML5 Canvas` for DOM manipulation and rendering,
-- Webpack to bundle and serve up the various scripts.
-
-### Implementation Timeline
-
-**Over the weekend**:
+**Weekend**:
 - [x] Setup the foundational framework and have a character and bubbles in the screen (basic functionality).
 - [x] Look into collisions in JS and begin implementing how larger bubbles will split into smaller ones.
 
-**Day 1**: Apply basic styling to the background and user controls (including the modal to describe the functionality).
+**Day 1**:
+- [ ] Apply basic styling to the background and user controls (including the modal to describe the functionality).
+- [ ] Have the bubbles split into smaller bubbles when hit by an arrow from the character.
+- [ ] Flesh out the different sizes of bubbles.
 
-**Day 2**: Dedicate this day to learning the `Web Audio` API.  First, build out the `AudioEvent` object to connect to the `Board` object.  Then, use `board.js` to create and render `Asteroid`s and `AudioEvent`s. Goals for the day:
+**Day 2**:
+- [ ] If a bubble hits the character, have the character lose a life.
+- [ ] Check that the controls are smooth and the speed of the bubbles is a good pace.
+- [ ] Style Level One.
+- [ ] Add Level Two - create bubbles of different sizes and speeds.
 
-- [x] Complete the `asteroids.js` module (constructor, update functions, colors)
-- [x] Get sounds to play on collisions
-- [x] Build first sound library
-- [x] Get collision graphics working
-- [x] Make the `Asteroid`s able to be created with mouse. Set vectors on mouse release.
+**Day 3**:
+- [ ] Look into adding sound effects.
 
-**Day 3**: Create the logic backend. Build out modular functions for handling the different evolutions. Goals for the day:
+**Day 4**:
+- [ ] Style the display and make sure that the everything is running smoothly. A day to make sure the code, interface, and functionality is clean.
+- [ ] Potentially add sound effects.
 
-- [x] Build Markov Matrix object and link it with collisions
-- [x] Export an `AudioEvent` object with correct type and handling logic
-- [x] Have a functional screen on the `Canvas` frontend that correctly handles creation and running of the simulation.
-- [x] Make sure that starting, stopping, and resetting works.
-
-**Day 4**: Install the controls for the user to interact with the game. Style the frontend, making it polished and professional. Goals for the day:
-
-- [x] Create controls for game speed, stop, start, restart, reset
-- [x] Build out list of instruments
-- [x] Have a styled `Canvas`, nice looking controls and title
-
-
-### Bonus features
+### Bonus Features
 
 - [ ] Build multiple levels.
 - [ ] Set a timer for each level.
