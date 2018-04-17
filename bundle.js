@@ -108,6 +108,17 @@ class Bubble {
 
     this.drawBubble(ctx);
   }
+
+  distanceBetween(x1, y1, x2, y2) {
+    let a = Math.abs(x1 - x2);
+    let b = Math.abs(y1 - y2);
+
+    return Math.sqrt(a * a + b * b);
+  }
+
+  checkCollison(x, y) {
+    return this.distanceBetween(x, y, this.currX, this.currY) < this.radius;
+  }
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Bubble);
