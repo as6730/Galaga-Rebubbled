@@ -60,104 +60,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/******/ ({
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble_js__ = __webpack_require__(1);
-
-
-let canvas = document.getElementById("myCanvas");
-let ctx = canvas.getContext("2d");
-
-let initialBubbleHeight = 100;
-let smallBubble = new __WEBPACK_IMPORTED_MODULE_0__bubble_js__["a" /* default */](
-  10,
-  2.3,
-  0.03,
-  canvas.width/2,
-  canvas.height-30 -initialBubbleHeight,
-  0.4,
-  0,
-  "#FFFF00",
-);
-let bigBubble = new __WEBPACK_IMPORTED_MODULE_0__bubble_js__["a" /* default */](
-  20,
-  4.0,
-  0.03,
-  canvas.width/2 - 20,
-  canvas.height-30 -initialBubbleHeight,
-  0.4,
-  0,
-  "green",
-);
-
-let bubbles = [];
-
-bubbles.push(smallBubble, bigBubble);
-
-// character
-let characterHeight = 30;
-let characterWidth = 25;
-let characterX = (canvas.width-characterWidth)/2;
-
-// user controllers
-let rightPressed = false;
-let leftPressed = false;
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e) {
-    if(e.keyCode == 39) {
-        rightPressed = true;
-    }
-    else if(e.keyCode == 37) {
-        leftPressed = true;
-    }
-}
-
-function keyUpHandler(e) {
-    if(e.keyCode == 39) {
-        rightPressed = false;
-    }
-    else if(e.keyCode == 37) {
-        leftPressed = false;
-    }
-}
-
-function drawCharacter() {
-    ctx.beginPath();
-    ctx.rect(characterX, canvas.height-characterHeight, characterWidth, characterHeight);
-    ctx.fillStyle = "#FF4500";
-    ctx.fill();
-    ctx.closePath();
-}
-
-function draw() {
-  if(rightPressed && characterX < canvas.width-characterWidth) {
-      characterX += 1.25;
-  }
-  else if(leftPressed && characterX > 0) {
-      characterX -= 1.25;
-  }
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawCharacter();
-  // bubbles.map(x => x.moveToNextPos(ctx, canvas));
-}
-
-
-setInterval(draw, 3);
-
-
-/***/ }),
-/* 1 */
+/***/ 10:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -165,30 +73,29 @@ class Bubble {
   constructor(radius, initialVelocityY, accelarationFactor, currX, currY, currDX, currDY, color) {
     this.radius = radius;
     this.initialVelocityY = initialVelocityY;
-    this.color = color;
+    this.accelarationFactor = accelarationFactor;
     this.currX = currX;
     this.currY = currY;
     this.currDX = currDX;
     this.currDY = currDY;
-    this.accelarationFactor = accelarationFactor;
+    this.color = color;
   }
 
-
   drawBubble(ctx) {
-      ctx.beginPath();
-      ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
   }
 
   moveToNextPos(ctx, canvas) {
     this.currDY += this.accelarationFactor;
 
-    if(this.currX + this.currDX > canvas.width - this.radius || this.currX + this.currDX < this.radius) {
+    if (this.currX + this.currDX > canvas.width - this.radius || this.currX + this.currDX < this.radius) {
       this.currDX = -this.currDX;
     }
-    if(this.currY + this.currDY > canvas.height - this.radius || this.currY + this.currDY < this.radius) {
+    if (this.currY + this.currDY > canvas.height - this.radius || this.currY + this.currDY < this.radius) {
       if (this.currDY > 0) {
         this.currDY = -this.initialVelocityY;
       } else {
@@ -206,6 +113,160 @@ class Bubble {
 /* harmony default export */ __webpack_exports__["a"] = (Bubble);
 
 
+/***/ }),
+
+/***/ 6:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__laser_js__ = __webpack_require__(8);
+
+
+
+let canvas = document.getElementById("myCanvas");
+let ctx = canvas.getContext("2d");
+
+let initialBubbleHeight = 100;
+let smallBubble = new __WEBPACK_IMPORTED_MODULE_0__bubble_js__["a" /* default */](
+  10,
+  2.3,
+  0.03,
+  canvas.width/2,
+  canvas.height - 30 - initialBubbleHeight,
+  0.4,
+  0,
+  "#FFFF00",
+);
+
+let bigBubble = new __WEBPACK_IMPORTED_MODULE_0__bubble_js__["a" /* default */](
+  20,
+  4.0,
+  0.03,
+  canvas.width/2 - 20,
+  canvas.height - 30 - initialBubbleHeight,
+  0.4,
+  0,
+  "green",
+);
+
+let bubbles = [];
+
+bubbles.push(smallBubble, bigBubble);
+
+// character
+let characterHeight = 30;
+let characterWidth = 25;
+let characterX = (canvas.width - characterWidth) / 2;
+
+function drawCharacter() {
+  ctx.beginPath();
+  ctx.rect(characterX, canvas.height - characterHeight, characterWidth, characterHeight);
+  ctx.fillStyle = "#FF4500";
+  ctx.fill();
+  ctx.closePath();
+}
+
+// user controllers
+let rightPressed = false;
+let leftPressed = false;
+let spaceBarPressed = false;
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+      rightPressed = true;
+  }
+  else if (e.keyCode == 37) {
+      leftPressed = true;
+  }
+  else if (e.keyCode == 32) {
+    spaceBarPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+      rightPressed = false;
+  }
+  else if (e.keyCode == 37) {
+      leftPressed = false;
+  }
+}
+
+let laser = new __WEBPACK_IMPORTED_MODULE_1__laser_js__["a" /* default */]();
+
+function draw() {
+  if (rightPressed && characterX < canvas.width - characterWidth) {
+    characterX += 1.25;
+  }
+  else if (leftPressed && characterX > 0) {
+    characterX -= 1.25;
+  }
+  else if (spaceBarPressed) {
+    console.log(spaceBarPressed);
+    laser.shoot(ctx, canvas); // add character pos to know where to shoot from
+    spaceBarPressed = false;
+  }
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawCharacter();
+  // bubbles.map(x => x.moveToNextPos(ctx, canvas));
+}
+
+
+setInterval(draw, 3);
+
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Laser {
+  constructor() {
+    this.radius = 5;
+    // this.initialVelocityX = 2.3;
+    this.accelarationFactor = 1.25;
+    // this.color = #008080;
+    this.currY = 30;
+    this.currDY = 30;
+  }
+
+  drawLaser(ctx) {
+    ctx.beginPath();
+    ctx.arc(10, 2.3, 0.03, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+    ctx.closePath();
+
+    // ctx.beginPath();
+    // ctx.moveTo(50,20);
+    // ctx.lineTo(50,100);
+    // ctx.stroke();
+    // ctx.fillStyle = this.color;
+    // ctx.closePath();
+  }
+
+  // add characterPos, to shoot
+  shoot(ctx, canvas) {
+    if (this.currY + this.currDY > canvas.width - this.radius || this.currY + this.currDY < this.radius) {
+      this.currDY += this.accelarationFactor;
+    }
+
+    this.currY += this.currDY;
+    this.drawLaser(ctx);
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Laser);
+
+
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=bundle.js.map

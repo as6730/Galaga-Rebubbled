@@ -1,0 +1,25 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "light-box",
+  "main": "app.js",
+  "directories": {
+   "lib": "lib"
+  },
+  "engines": {
+    "node": ">=8.1.0"
+  },
+  "scripts": {
+    "start": "webpack --watch"
+  },
+  "dependencies": {
+     "babel-core": "^6.26.0",
+     "babel-jest": "^22.4.1",
+     "babel-loader": "^7.1.4",
+     "babel-preset-es2015": "^6.24.1",
+     "webpack": "^3.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
