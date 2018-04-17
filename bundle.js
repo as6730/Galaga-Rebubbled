@@ -95,7 +95,7 @@ class Bubble {
     if (this.currX + this.currDX > canvas.width - this.radius || this.currX + this.currDX < this.radius) {
       this.currDX = -this.currDX;
     }
-    
+
     if (this.currY + this.currDY > canvas.height - this.radius || this.currY + this.currDY < this.radius) {
       if (this.currDY > 0) {
         this.currDY = -this.initialVelocityY;
@@ -126,8 +126,12 @@ class Bubble {
     return (Math.abs(x - this.currX) < this.radius) && (y < this.currY);
   }
 
+  checkEdgeCollision(x, y) {
+    return this.distanceBetween(x, y, this.currX, this.currY) < this.radius;
+  }
+
   checkCollison(x, y) {
-    return this.distanceBetween(x, y, this.currX, this.currY) < this.radius || this.checkHorizontalCollision(x, y);
+    return  this.checkEdgeCollision(x, y) || this.checkHorizontalCollision(x, y);
   }
 };
 
@@ -260,12 +264,6 @@ class Laser {
   }
 
   drawLaser(ctx) {
-    // ctx.beginPath();
-    // ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
-    // ctx.fillStyle = this.color;
-    // ctx.fill();
-    // ctx.closePath();
-
     ctx.beginPath();
     ctx.moveTo(this.initialX, this.initialY);
     ctx.lineTo(this.currX, this.currY);
