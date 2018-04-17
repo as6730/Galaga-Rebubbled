@@ -228,18 +228,17 @@ setInterval(draw, 3);
 
 "use strict";
 class Laser {
-  constructor() {
+  constructor(currX, currY) {
     this.radius = 5;
-    // this.initialVelocityX = 2.3;
-    this.accelarationFactor = 1.25;
-    // this.color = #008080;
-    this.currY = 30;
-    this.currDY = 30;
+    this.color = 'red';
+    this.currY = currY;
+    this.currDY = 1.5;
+    this.currX = currX;
   }
 
   drawLaser(ctx) {
     ctx.beginPath();
-    ctx.arc(10, 2.3, 0.03, 0, Math.PI*2);
+    ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
@@ -253,13 +252,13 @@ class Laser {
   }
 
   // add characterPos, to shoot
-  shoot(ctx, canvas) {
-    if (this.currY + this.currDY > canvas.width - this.radius || this.currY + this.currDY < this.radius) {
-      this.currDY += this.accelarationFactor;
-    }
-
-    this.currY += this.currDY;
+  moveToNextPos(ctx, canvas) {
+    this.currY -= this.currDY;
     this.drawLaser(ctx);
+  }
+
+  isInBounds() {
+    return this.currY > 10;
   }
 };
 
