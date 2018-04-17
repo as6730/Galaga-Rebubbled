@@ -257,7 +257,7 @@ class Laser {
     this.radius = 5;
     this.color = 'red';
     this.currY = currY;
-    this.currDY = 1.5;
+    this.currDY = 2.5;
     this.currX = currX;
     this.initialX = currX;
     this.initialY = currY;
@@ -267,6 +267,11 @@ class Laser {
     ctx.beginPath();
     ctx.moveTo(this.initialX, this.initialY);
     ctx.lineTo(this.currX, this.currY);
+    ctx.lineWidth = 2;
+    ctx.shadowColor = '#00ff00';
+    ctx.shadowBlur = 2;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     ctx.stroke();
     ctx.fillStyle = this.color;
     ctx.closePath();
