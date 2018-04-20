@@ -5,11 +5,11 @@
     <title>Galaga Rebubbled</title>
     <style>
       * { padding: 0; margin: 0; }
-      canvas { background: #000; display: block; margin: 0 auto; margin-top: 60px;}
+      canvas { background-color: rgba(0, 0, 0, 0.6); display: block; margin: 0 auto; margin-top: 60px; box-shadow: 0px 0px 10px 2px #556B2F; }
       body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0; }
       main { position: absolute; top: 40px; width: 100%; }
     </style>
-    <link rel="stylesheet" type="text/css" href="_index.css">
+    <link rel="stylesheet" type="text/css" href="./assets/stylesheets/_index.css">
   </head>
   <body>
     <canvas id="canvas" width="700" height="445"></canvas>
@@ -18,13 +18,16 @@
 
     <main>
       <h1 class="title">Galaga Rebubbled</h1>
-      <h2 class="instructions">
-        <p class="spacebar"> Spacebar </p>
+      <div class="instructions" id="instructions">
+        <p class="spacebar key"> Spacebar </p>
         <p>to shoot</p>
-        <p class="left-key key"> ← </p> <p class="right-key key"> ➝ </p>
+        <div class="keys">
+          <p class="left-key key"> ← </p>
+          <p class="right-key key"> ➝ </p>
+        </div>
         <p>to navigate</p>
         <p>Press enter to begin!</p>
-      </h2>
+      </div>
     </main>
   </body>
 </html>

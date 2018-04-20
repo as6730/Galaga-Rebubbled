@@ -1,15 +1,57 @@
-.title {
-  font-family: "Courier";
-  font-size: 20px;
+.main {
   display: flex;
-  position: relative;
   justify-content: center;
-  align-content: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  color: rgba(255,255,255,1.0);
-  text-shadow: rgba(0,225,230, 0.65) 2px 3px;
-  text-shadow: rgba(255, 108, 87, 0.75) 1px 4px;
+
+}
+
+.instructions {
+  height: 250px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+}
+
+.p {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.title {
+  margin-top: 80px;
+  font-size: 30px;
+  color: orange;
+  display: flex;
+  justify-content: center;
+  text-shadow: rgba(0, 220, 15, 0.85) 1px 2px;
+}
+
+.keys {
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
+}
+
+.key {
+  background-color: lightgrey;
+  height: 1.5em;
+  width: 1.5em;
+  color: black;
+  border-left-width: 3px;
+  border-right-width: 3px;
+  border-radius: 3px;
+  text-shadow: rgba(255, 108, 87, 0.75) 0px 0px;
   text-align: center;
-  z-index: 9000;
+}
+
+.key:hover {
+  background-color: darkgrey;
+}
+
+p.spacebar.key {
+    width: 150px;
 }
