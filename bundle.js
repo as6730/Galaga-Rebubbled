@@ -219,6 +219,8 @@ function draw() {
         drawGameOver(ctx);
         level = 0;
         lives = 3;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        setTimeout(function(){document.getElementById("instructions").style.display = "flex"}, 1000);
       } else {
         drawLevelFail(ctx);
         lives--;
