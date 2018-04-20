@@ -116,7 +116,7 @@ function keyDownHandler(e) {
       character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default */](canvas);
       isGamePaused = false;
       bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level]
-      document.getElementById("instructions").remove();
+      document.getElementById("instructions").setAttribute("hidden", true);
     } else if (laser === null) {
       laser = new __WEBPACK_IMPORTED_MODULE_6__laser_js__["a" /* default */](character.currX + (character.width / 2), canvas.height);
     }
