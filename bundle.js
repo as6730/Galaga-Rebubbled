@@ -91,7 +91,6 @@ let ctx = canvas.getContext("2d");
 
 // characters
 let initialBubbleHeight = 100;
-
 let laser = null;
 let character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default */](canvas);
 let score = 0;
@@ -135,10 +134,10 @@ function keyUpHandler(e) {
 // score
 function drawScore(ctx) {
   ctx.font = '20px courier';
-  ctx.fillStyle= '#7CFC00';
-  ctx.shadowBlur = 1;
-  ctx.shadowColor = '#7CFC00';
-  ctx.strokeStyle= '#7CFC00';
+  ctx.fillStyle= '#17ffd3';
+  ctx.shadowBlur = 15;
+  ctx.shadowColor = '#17ffd3';
+  ctx.strokeStyle= '#17ffd3';
   ctx.lineWidth = 1;
   ctx.fillText(`Score: ${score}`, 8, 20);
 }
@@ -146,10 +145,10 @@ function drawScore(ctx) {
 // lives
 function drawLives(ctx) {
   ctx.font = '20px courier';
-  ctx.fillStyle= '#7CFC00';
-  ctx.shadowBlur = 1;
-  ctx.shadowColor = '#7CFC00';
-  ctx.strokeStyle= '#7CFC00';
+  ctx.fillStyle= '#17ffd3';
+  ctx.shadowBlur = 15;
+  ctx.shadowColor = '#17ffd3';
+  ctx.strokeStyle= '#17ffd3';
   ctx.lineWidth = 1;
   ctx.fillText(`Lives: ${lives}`, 8, 40);
 }
@@ -157,33 +156,37 @@ function drawLives(ctx) {
 // game over
 function drawGameOver(ctx) {
   ctx.font = '20px courier';
-  ctx.fillStyle = '#17ffd3';
+  ctx.fillStyle = '#FFFAFA';
   ctx.shadowBlur = 20;
-  ctx.shadowColor = '#17ffd3';
+  ctx.shadowColor = '#FFFAFA';
   ctx.lineWidth = 1;
-  ctx.fillText(`Game over. Your final score was: ${score}`, canvas.width / 2 - 270, canvas.height / 2);
+  ctx.fillText(`Game over. Your final score was: ${score}`, canvas.width / 2 - 200, canvas.height / 2);
 }
 
 // level fail
 function drawLevelFail(ctx) {
-  ctx.font = '25px courier';
+  ctx.font = '35px courier';
+  ctx.fillStyle = '#FFD700';
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = '#FFD700';
+  ctx.lineWidth = 1;
+  ctx.fillText(`Retry`, canvas.width / 2 - 45, canvas.height / 2);
+}
+
+// next level
+function drawLevel(ctx) {
+  ctx.font = '20px courier';
   ctx.fillStyle = '#17ffd3';
   ctx.shadowBlur = 20;
   ctx.shadowColor = '#17ffd3';
   ctx.lineWidth = 1;
-  ctx.fillText(`You failed.`, canvas.width / 2 - 65, canvas.height / 2);
+  ctx.fillText(`Level ${level}`, canvas.width - 90, 20);
 }
-
-// gameOver
-
-// function gameOver() {
-//
-// }
 
 let level = 0;
 let bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
 // level arrays
-function loadNextLevelIfFinished() {
+function loadNextLevelIfFinished(ctx) {
   if (bubbles.length === 0) {
     level += 1;
     bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
@@ -224,7 +227,7 @@ function draw() {
       bubbles = [];
       return;
     } else {
-      loadNextLevelIfFinished();
+      loadNextLevelIfFinished(ctx);
     }
 
     // check bubble collision with laser
@@ -259,7 +262,6 @@ function draw() {
           bubbles.push(new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](collidedBubble.currX, collidedBubble.currY, -0.35, -1.5));
           score += 9;
         }
-
         // remove the laser
         laser = null;
       }
@@ -277,14 +279,14 @@ function draw() {
       }
     }
 
+    character.drawSpaceship(ctx);
     drawScore(ctx);
     drawLives(ctx);
-    character.drawSpaceship(ctx);
+    drawLevel(ctx);
   }
 }
 
 setInterval(draw, 5);
-// window.requestAnimationFrame(draw);
 
 
 /***/ }),
@@ -352,6 +354,8 @@ class Bubble {
     ctx.beginPath();
     ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
     ctx.fillStyle = this.color;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#17ffd3';
     ctx.fill();
     ctx.closePath();
   }
@@ -551,37 +555,37 @@ let levelFive = [
 function getAllLevels() {
   return [
     [
-                  new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
-                  new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 30 - 70, 0),
-                  new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 30 - 70, 0)
-                ], [
-                              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
-                              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
-                              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
-                              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
-                              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
-                              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
-                            ], [
-                                          new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -1),
-                                          new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.5),
-                                          new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.5),
-                                          new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.7),
-                                        ],[
-                                                      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.1),
-                                                      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.1),
-                                                      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 220, canvas.height - 160, 0.1),
-                                                      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 220, canvas.height - 160, -0.1),
-                                                      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.1),
-                                                      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 300, canvas.height - 160, -0.1),
-                                                      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 200, 1),
-                                                      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 160, -0.5),
-                                                    ], [
-                                                                  new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -0.5),
-                                                                  new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100,-0.1),
-                                                                  new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
-                                                                  new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.5),
-                                                                  new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
-                                                                ]
+      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 30 - 70, 0),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 30 - 70, 0)
+    ], [
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
+    ], [
+      new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.7),
+    ],[
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 220, canvas.height - 160, 0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 220, canvas.height - 160, -0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 300, canvas.height - 160, -0.1),
+      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 200, 1),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 160, -0.5),
+    ], [
+      new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100,-0.1),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
+    ]
   ];
 }
 
@@ -599,12 +603,13 @@ class spaceship {
     this.width = 42;
     this.currX = (canvas.width - this.width) / 2;
     this.currY = canvas.height - this.height;
+    this.img = new Image();
+    this.img.src = "/Users/alexandrasavramis/Desktop/bubble_trouble_rebubbled/assets/spaceship.png";
   }
 
   drawSpaceship(ctx) {
-    let img = new Image();
-    img.src = "/Users/alexandrasavramis/Desktop/bubble_trouble_rebubbled/assets/spaceship.png";
-    ctx.drawImage(img, this.currX, this.currY, this.width, this.height);
+    ctx.shadowBlur = 0;
+    ctx.drawImage(this.img, this.currX, this.currY, this.width, this.height);
   }
 
 
