@@ -6,11 +6,10 @@ Rebubbled is a clone of the classic Bubble Trouble game, in which the character 
 
 ### Functionality & MVP  
 
-- [ ] There will be a control modal describing the rules.
-- [ ] Destroying bubbles of various sizes by shooting them with a harpoon.
-- [ ] Upon contact with the harpoon, the bubble will split into smaller components until completely destroyed.
-- [ ] If the main character is touched by a bouncing bubble, the character loses a life.
-- [ ] Controls on the bottom of the game's window will allow the user to quit the game.
+- [x] There will be a control modal describing the rules.
+- [x] Destroying bubbles of various sizes by shooting them with a harpoon.
+- [x] Upon contact with the laser, the bubble will split into smaller components until completely destroyed.
+- [x] If the main character is touched by a bouncing bubble, the character loses a life.
 
 ### Wireframes
 
@@ -46,3 +45,4 @@ Rebubbled will be a single-window game. The user will be able to move left and r
 
 - [ ] Set a timer for each level.
 - [ ] Have a variety of different weapons that drop down from popped bubbles that the character can pick up and utilize.
+- [ ] Controls on the bottom of the game's window will allow the user to quit the game.
