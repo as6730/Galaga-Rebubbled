@@ -605,7 +605,7 @@ class spaceship {
     this.currX = (canvas.width - this.width) / 2;
     this.currY = canvas.height - this.height;
     this.img = new Image();
-    this.img.src = "/Users/alexandrasavramis/Desktop/bubble_trouble_rebubbled/assets/spaceship.png";
+    this.img.src = "../assets/spaceship.png";
   }
 
   drawSpaceship(ctx) {
