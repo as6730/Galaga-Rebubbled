@@ -1,4 +1,4 @@
-# Bubble Trouble: Rebubbled
+# Galaga: Rebubbled
 
 ### Game Overview and Logic
 
@@ -25,26 +25,24 @@ Rebubbled will be a single-window game. The user will be able to move left and r
 - [x] Look into collisions in JS and begin implementing how larger bubbles will split into smaller ones.
 
 **Day 1**:
-- [ ] Apply basic styling to the background and user controls (including the modal to describe the functionality).
-- [ ] Have the bubbles split into smaller bubbles when hit by an arrow from the character.
-- [ ] Flesh out the different sizes of bubbles.
+- [x] Apply basic styling to the background and user controls (including the modal to describe the functionality).
+- [x] Have the bubbles split into smaller bubbles when hit by an arrow from the character.
+- [x] Flesh out the different sizes of bubbles.
 
 **Day 2**:
-- [ ] If a bubble hits the character, have the character lose a life.
-- [ ] Check that the controls are smooth and the speed of the bubbles is a good pace.
-- [ ] Style Level One.
-- [ ] Add Level Two - create bubbles of different sizes and speeds.
+- [x] If a bubble hits the character, have the character lose a life.
+- [x] Check that the controls are smooth and the speed of the bubbles is a good pace.
+- [x] Style Level One.
+- [x] Add Level Two - create bubbles of different sizes and speeds.
 
 **Day 3**:
-- [ ] Look into adding sound effects.
+- [x] Allow the user to accrue points based off the bubble and the level.
+- [x] Build multiple levels.
 
 **Day 4**:
-- [ ] Style the display and make sure that the everything is running smoothly. A day to make sure the code, interface, and functionality is clean.
-- [ ] Potentially add sound effects.
+- [x] Style the display and make sure that the everything is running smoothly. A day to make sure the code, interface, and functionality is clean.
 
 ### Bonus Features
 
-- [ ] Build multiple levels.
 - [ ] Set a timer for each level.
-- [ ] Allow the user to accrue points based off the bubble and the level.
 - [ ] Have a variety of different weapons that drop down from popped bubbles that the character can pick up and utilize.
