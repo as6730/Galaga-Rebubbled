@@ -281,6 +281,7 @@ function keyDownHandler(e) {
     } else if (laser === null) {
       laser = new __WEBPACK_IMPORTED_MODULE_6__laser_js__["a" /* default */](character.currX + (character.width / 2), canvas.height);
     }
+    document.getElementById("instructions").style.display = "none";
   }
 }
 
@@ -386,6 +387,7 @@ function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         setTimeout(function(){document.getElementById("instructions").style.display = "flex"}, 1000);
       } else {
+        document.getElementById("instructions").style.display = "none";
         drawLevelFail(ctx);
         lives--;
       }
@@ -450,6 +452,7 @@ function draw() {
     drawScore(ctx);
     drawLives(ctx);
     drawLevel(ctx);
+    // requestAnimationFrame(draw);
   }
 }
 
