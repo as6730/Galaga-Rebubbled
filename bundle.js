@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,14 +68,175 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class Bubble {
+  constructor(radius, initialVelocityY, accelarationFactor, currX, currY, currDX, currDY, color) {
+    this.radius = radius;
+    this.initialVelocityY = initialVelocityY;
+    this.accelarationFactor = accelarationFactor;
+    this.currX = currX;
+    this.currY = currY;
+    this.currDX = currDX;
+    this.currDY = currDY;
+    this.color = color;
+  }
+
+  drawBubble(ctx) {
+    ctx.beginPath();
+    ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
+    ctx.fillStyle = this.color;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#17ffd3';
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  moveToNextPos(ctx, canvas) {
+    this.currDY += this.accelarationFactor;
+
+    if (this.currX + this.currDX > canvas.width - this.radius || this.currX + this.currDX < this.radius) {
+      this.currDX = -this.currDX;
+    }
+
+    if (this.currY + this.currDY > canvas.height - this.radius || this.currY + this.currDY < this.radius) {
+      if (this.currDY > 0) {
+        this.currDY = -this.initialVelocityY;
+      } else {
+        this.currDY = this.initialVelocityY;
+      }
+    }
+
+    this.currX += this.currDX;
+    this.currY += this.currDY;
+
+    this.drawBubble(ctx);
+  }
+
+  distanceBetween(x1, y1, x2, y2) {
+    let a = Math.abs(x1 - x2);
+    let b = Math.abs(y1 - y2);
+
+    return Math.sqrt(a * a + b * b);
+  }
+
+  checkHorizontalCollision(x, y) {
+    // check that the line's height is greater than (remember the axis
+    // are inversed) the center of the bubble height
+    // check if the line's horizontal distance from the bubble's center is
+    // less than the radius
+
+    return (Math.abs(x - this.currX) < this.radius) && (y < this.currY);
+  }
+
+  checkEdgeCollision(x, y) {
+    return this.distanceBetween(x, y, this.currX, this.currY) < this.radius;
+  }
+
+  checkCollision(x, y) {
+    return  this.checkEdgeCollision(x, y) || this.checkHorizontalCollision(x, y);
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Bubble);
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(0);
+
+
+class BubbleFive extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
+  constructor(currX, currY, currDX = 0.3, currDY = 0) {
+    super(50, 3.9, 0.02, currX, currY, currDX, currDY, "teal");
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (BubbleFive);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(0);
+
+
+class BubbleFour extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
+  constructor(currX, currY, currDX = 0.3, currDY = 0) {
+    super(45, 3.7, 0.02, currX, currY, currDX, currDY, "pink");
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (BubbleFour);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(0);
+
+
+class BubbleThree extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
+  constructor(currX, currY, currDX = 0.3, currDY = 0) {
+    super(30, 3.5, 0.02, currX, currY, currDX, currDY, "green");
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (BubbleThree);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(0);
+
+
+class BubbleTwo extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
+  constructor(currX, currY, currDX = 0.35, currDY = 0) {
+    super(20, 3, 0.02, currX, currY, currDX, currDY, "red");
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (BubbleTwo);
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(0);
+
+
+class BubbleOne extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
+  constructor(currX, currY, currDX = 0.8, currDY = 0) {
+    super(5, 2.0, 0.02, currX, currY, currDX, currDY, "yellow");
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (BubbleOne);
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles_bubbleFive_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__levels_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__laser_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles_bubbleFive_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__levels_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__laser_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__spaceship_js__ = __webpack_require__(9);
 
 
@@ -186,15 +347,18 @@ function drawLevel(ctx) {
 
 let level = 0;
 let bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
-// level arrays
+// load next level
 function loadNextLevelIfFinished(ctx) {
   if (bubbles.length === 0) {
     level += 1;
     bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
+    character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default */](canvas);
   }
 }
 
 function draw() {
+
+  // event listeners
   if (!isGamePaused) {
     if (rightPressed && character.currX < canvas.width - character.width) {
       character.moveToNextPos(ctx, 1.25);
@@ -289,11 +453,108 @@ function draw() {
   }
 }
 
+// window.requestAnimationFrame(draw);
 setInterval(draw, 5);
 
 
 /***/ }),
-/* 1 */
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getAllLevels;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles_bubbleFive_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__ = __webpack_require__(5);
+
+
+
+
+
+
+// let levelOne = [
+//               new BubbleThree(canvas.width/2 + 100, canvas.height - 130, 0),
+//               new BubbleTwo(canvas.width/2 - 180, canvas.height - 30 - 70, 0),
+//               new BubbleTwo(canvas.width/2 + 180, canvas.height - 30 - 70, 0)
+//               ];
+//
+// let levelTwo = [
+//               new BubbleTwo(canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
+//               new BubbleTwo(canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
+//               new BubbleTwo(canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
+//               new BubbleTwo(canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+//               new BubbleTwo(canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
+//               new BubbleTwo(canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
+//               ];
+//
+// let levelThree = [
+//               new BubbleFour(canvas.width/2 - 180, canvas.height - 70 - 100, -1),
+//               new BubbleOne(canvas.width/2 - 300, canvas.height - 160, 0.5),
+//               new BubbleOne(canvas.width/2 - 260, canvas.height - 160, 0.5),
+//               new BubbleOne(canvas.width/2 + 260, canvas.height - 160, -0.7),
+//               ];
+//
+// let levelFour = [
+//               new BubbleOne(canvas.width/2 - 300, canvas.height - 160, 0.1),
+//               new BubbleOne(canvas.width/2 - 260, canvas.height - 160, 0.1),
+//               new BubbleOne(canvas.width/2 - 220, canvas.height - 160, 0.1),
+//               new BubbleOne(canvas.width/2 + 220, canvas.height - 160, -0.1),
+//               new BubbleOne(canvas.width/2 + 260, canvas.height - 160, -0.1),
+//               new BubbleOne(canvas.width/2 + 300, canvas.height - 160, -0.1),
+//               new BubbleThree(canvas.width/2 + 100, canvas.height - 200, 1),
+//               new BubbleTwo(canvas.width/2 - 130, canvas.height - 160, -0.5),
+//               ];
+//
+// let levelFive = [
+//               new BubbleFour(canvas.width/2 - 180, canvas.height - 70 - 100, -0.5),
+//               new BubbleTwo(canvas.width/2 - 80, canvas.height - 70 - 100,-0.1),
+//               new BubbleTwo(canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+//               new BubbleOne(canvas.width/2 + 260, canvas.height - 160, -0.5),
+//               new BubbleThree(canvas.width/2 + 100, canvas.height - 130, 0),
+//               ];
+
+function getAllLevels() {
+  return [
+    [
+      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 30 - 70, 0),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 30 - 70, 0)
+    ], [
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
+    ], [
+      new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.7),
+    ],[
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 220, canvas.height - 160, 0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 220, canvas.height - 160, -0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.1),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 300, canvas.height - 160, -0.1),
+      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 200, 1),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 160, -0.5),
+    ], [
+      new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100,-0.1),
+      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.5),
+      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
+    ]
+  ];
+}
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -334,263 +595,6 @@ class Laser {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (Laser);
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Bubble {
-  constructor(radius, initialVelocityY, accelarationFactor, currX, currY, currDX, currDY, color) {
-    this.radius = radius;
-    this.initialVelocityY = initialVelocityY;
-    this.accelarationFactor = accelarationFactor;
-    this.currX = currX;
-    this.currY = currY;
-    this.currDX = currDX;
-    this.currDY = currDY;
-    this.color = color;
-  }
-
-  drawBubble(ctx) {
-    ctx.beginPath();
-    ctx.arc(this.currX, this.currY, this.radius, 0, Math.PI*2);
-    ctx.fillStyle = this.color;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = '#17ffd3';
-    ctx.fill();
-    ctx.closePath();
-  }
-
-  moveToNextPos(ctx, canvas) {
-    this.currDY += this.accelarationFactor;
-
-    if (this.currX + this.currDX > canvas.width - this.radius || this.currX + this.currDX < this.radius) {
-      this.currDX = -this.currDX;
-    }
-
-    if (this.currY + this.currDY > canvas.height - this.radius || this.currY + this.currDY < this.radius) {
-      if (this.currDY > 0) {
-        this.currDY = -this.initialVelocityY;
-      } else {
-        this.currDY = this.initialVelocityY;
-      }
-    }
-
-    this.currX += this.currDX;
-    this.currY += this.currDY;
-
-    this.drawBubble(ctx);
-  }
-
-  distanceBetween(x1, y1, x2, y2) {
-    let a = Math.abs(x1 - x2);
-    let b = Math.abs(y1 - y2);
-
-    return Math.sqrt(a * a + b * b);
-  }
-
-  checkHorizontalCollision(x, y) {
-    // check that the line's height is greater than (remember the axis
-    // are inversed) the center of the bubble height
-    // check if the line's horizontal distance from the bubble's center is
-    // less than the radius
-
-    return (Math.abs(x - this.currX) < this.radius) && (y < this.currY);
-  }
-
-  checkEdgeCollision(x, y) {
-    return this.distanceBetween(x, y, this.currX, this.currY) < this.radius;
-  }
-
-  checkCollision(x, y) {
-    return  this.checkEdgeCollision(x, y) || this.checkHorizontalCollision(x, y);
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (Bubble);
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(2);
-
-
-class BubbleFive extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
-  constructor(currX, currY, currDX = 0.3, currDY = 0) {
-    super(50, 3.9, 0.02, currX, currY, currDX, currDY, "teal");
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (BubbleFive);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(2);
-
-
-class BubbleFour extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
-  constructor(currX, currY, currDX = 0.3, currDY = 0) {
-    super(45, 3.7, 0.02, currX, currY, currDX, currDY, "pink");
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (BubbleFour);
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(2);
-
-
-class BubbleThree extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
-  constructor(currX, currY, currDX = 0.3, currDY = 0) {
-    super(30, 3.5, 0.02, currX, currY, currDX, currDY, "green");
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (BubbleThree);
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(2);
-
-
-class BubbleTwo extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
-  constructor(currX, currY, currDX = 0.35, currDY = 0) {
-    super(20, 3, 0.02, currX, currY, currDX, currDY, "red");
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (BubbleTwo);
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubble__ = __webpack_require__(2);
-
-
-class BubbleOne extends __WEBPACK_IMPORTED_MODULE_0__bubble__["a" /* default */] {
-  constructor(currX, currY, currDX = 0.8, currDY = 0) {
-    super(5, 2.0, 0.02, currX, currY, currDX, currDY, "yellow");
-  }
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (BubbleOne);
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = getAllLevels;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bubbles_bubbleFive_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__ = __webpack_require__(7);
-
-
-
-
-
-
-let levelOne = [
-              new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 30 - 70, 0),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 30 - 70, 0)
-              ];
-
-let levelTwo = [
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
-              ];
-
-let levelThree = [
-              new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -1),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.5),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.5),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.7),
-              ];
-
-let levelFour = [
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.1),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.1),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 220, canvas.height - 160, 0.1),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 220, canvas.height - 160, -0.1),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.1),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 300, canvas.height - 160, -0.1),
-              new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 200, 1),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 160, -0.5),
-              ];
-
-let levelFive = [
-              new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -0.5),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100,-0.1),
-              new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
-              new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.5),
-              new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
-              ];
-
-function getAllLevels() {
-  return [
-    [
-      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 30 - 70, 0),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 30 - 70, 0)
-    ], [
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
-    ], [
-      new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -1),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.5),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.5),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.7),
-    ],[
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 300, canvas.height - 160, 0.1),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 260, canvas.height - 160, 0.1),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 - 220, canvas.height - 160, 0.1),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 220, canvas.height - 160, -0.1),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.1),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 300, canvas.height - 160, -0.1),
-      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 200, 1),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 160, -0.5),
-    ], [
-      new __WEBPACK_IMPORTED_MODULE_1__bubbles_bubbleFour_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100, -0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100,-0.1),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
-      new __WEBPACK_IMPORTED_MODULE_4__bubbles_bubbleOne_js__["a" /* default */](canvas.width/2 + 260, canvas.height - 160, -0.5),
-      new __WEBPACK_IMPORTED_MODULE_2__bubbles_bubbleThree_js__["a" /* default */](canvas.width/2 + 100, canvas.height - 130, 0),
-    ]
-  ];
-}
 
 
 /***/ }),
