@@ -257,7 +257,7 @@ let character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default *
 let score = 0;
 let lives = 3;
 let isGamePaused = true;
-let isBetweenLevels = false;
+let inBetweenCountdown = 0;
 let alreadyDraw = true;
 
 // user controllers
@@ -345,22 +345,30 @@ function drawLevel(ctx) {
   ctx.shadowBlur = 20;
   ctx.shadowColor = '#17ffd3';
   ctx.lineWidth = 1;
-  ctx.fillText(`Level ${level}`, canvas.width - 90, 20);
+  ctx.fillText(`Level ${level + 1}`, canvas.width - 90, 20);
 }
 
 // get ready for next level
-function drawGetReady(ctx) {
+function drawGetReady(ctx, secondsRemaining) {
   ctx.font = '35px courier';
   ctx.fillStyle = '#FFD700';
   ctx.shadowBlur = 20;
   ctx.shadowColor = '#FFD700';
   ctx.lineWidth = 1;
-  ctx.fillText(`Get Ready!`, canvas.width / 2 - 65, canvas.height / 2);
+  ctx.fillText(`Get Ready ${secondsRemaining}!`, canvas.width / 2 - 100, canvas.height / 2);
 }
 
+// countdown between levels
+function countdownLevel(ctx) {
+  for (var i = 6; i > 1; i--) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawGetReady(ctx, i)
+  }
+}
 
 let level = 0;
 let bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
+let timer;
 // load next level
 function loadNextLevelIfFinished(ctx) {
   if (bubbles.length === 0) {
@@ -369,22 +377,27 @@ function loadNextLevelIfFinished(ctx) {
     character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default */](canvas);
 
     // pause game in between levels
-    isBetweenLevels = true;
+    inBetweenCountdown = 5;
     alreadyDraw = false;
-    setTimeout(function () {
-      isBetweenLevels = false;
-    }, 4000)
+    timer = setInterval(function () {
+      inBetweenCountdown--;
+      alreadyDraw = false;
+    }, 1000)
   }
 }
 
 function draw() {
   // check if character is between levels
-  if (isBetweenLevels) {
+  if (inBetweenCountdown > 0) {
     if (!alreadyDraw) {
-      drawGetReady(ctx);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawGetReady(ctx, inBetweenCountdown);
       alreadyDraw = true;
     }
     return;
+  } else {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    window.clearInterval(timer);
   }
 
   // event listeners
@@ -556,8 +569,8 @@ function getAllLevels() {
     ], [
       new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 180, canvas.height - 70 - 100,  -0.5),
       new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 130, canvas.height - 70 - 100, -0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
-      new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
+      // new BubbleTwo(canvas.width/2 - 80, canvas.height - 70 - 100, -0.5),
+      // new BubbleTwo(canvas.width/2 + 80, canvas.height - 70 - 100, 0.5),
       new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 130, canvas.height - 70 - 100, 0.5),
       new __WEBPACK_IMPORTED_MODULE_3__bubbles_bubbleTwo_js__["a" /* default */](canvas.width/2 + 180, canvas.height - 70 - 100, 0.5)
     ], [
