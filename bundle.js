@@ -396,7 +396,6 @@ function draw() {
     }
     return;
   } else {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     window.clearInterval(timer);
   }
 
@@ -425,8 +424,10 @@ function draw() {
         drawGameOver(ctx);
         level = 0;
         lives = 3;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        setTimeout(function(){document.getElementById("instructions").style.display = "flex"}, 1000);
+        setTimeout(function(){
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          document.getElementById("instructions").style.display = "flex"
+        }, 3000);
       } else {
         document.getElementById("instructions").style.display = "none";
         drawLevelFail(ctx);
@@ -437,8 +438,8 @@ function draw() {
       bubbles = [];
       return;
     } else {
-      loadNextLevelIfFinished(ctx);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      loadNextLevelIfFinished(ctx);
     }
 
     // check bubble collision with laser

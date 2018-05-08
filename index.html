@@ -3,47 +3,41 @@
   <head>
     <meta charset="utf-8">
     <title>Galaga Rebubbled</title>
-    <style>
-      * { padding: 0; margin: 0; }
-      canvas { background-color: rgba(0, 0, 0, 0.6); display: block; margin: 0 auto; margin-top: 60px; box-shadow: 0px 0px 10px 2px #556B2F; }
-      body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0; }
-      main { position: absolute; top: 40px; width: 100%; }
-    </style>
     <link rel="stylesheet" type="text/css" href="./assets/stylesheets/index.css">
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
   </head>
   <body>
-    <canvas id="canvas" width="700" height="445"></canvas>
-    <script type="text/javascript" src="./bundle.js" /></script>
     <img src="./assets/background.jpg" style="position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:-1;">
 
-    <main>
-      <h1 class="title">Galaga Rebubbled</h1>
-      <div class="links">
-        <a href="https://github.com/as6730" id="github" target="_blank">
-          <i class="fab fa-github fa-2x"></i>
-        </a>
-        <a href="https://angel.co/alexandra-savramis" id="angellist" target="_blank">
-          <i class="fab fa-angellist fa-2x"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/alexandrasavramis/" id="linkedin" target="_blank">
-          <i class="fab fa-linkedin fa-2x"></i>
-        </a>
-      </div>
-      
+    <div class="vertical-container">
+      <h1>Galaga Rebubbled</h1>
+      <canvas id="canvas" width="700" height="445"> </canvas>
+
       <div class="instructions" id="instructions">
-        <p class="spacebar key"> Spacebar </p>
-        <p>to shoot</p>
-        <div class="keys">
-          <p class="left-key key"> ← </p>
-          <p class="right-key key"> ➝ </p>
+        <div class="spacebar key margin-space"> Spacebar </div>
+        <div class="margin-space">to shoot</div>
+        <div class="keys margin-space">
+          <div class="key"> ← </div>
+          <div class="key"> ➝ </div>
         </div>
-        <p>to navigate</p>
-        <p>Press spacebar to begin!</p>
+        <div class="margin-space">to navigate</div>
+        <div class="margin-space">Press spacebar to begin!</div>
       </div>
-
-
-    </main>
+      <div class="links-container">
+        <div class="links">
+            <a href="https://github.com/as6730" id="github" target="_blank">
+              <i class="fab fa-github fa-lg"></i>
+            </a>
+            <a href="https://angel.co/alexandra-savramis" id="angellist" target="_blank">
+              <i class="fab fa-angellist fa-lg"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/alexandrasavramis/" id="linkedin" target="_blank">
+              <i class="fab fa-linkedin fa-lg"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="./bundle.js" /></script>
   </body>
 </html>
