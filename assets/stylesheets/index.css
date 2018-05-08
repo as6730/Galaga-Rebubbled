@@ -54,3 +54,18 @@
 p.spacebar.key {
   width: 150px;
 }
+
+.links {
+  color: white;
+  margin-top: 500px;
+  margin-left: 900px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+}
+
+.links i {
+  color: orange;
+  margin: 15px;
+}
