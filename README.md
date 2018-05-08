@@ -19,7 +19,9 @@ Rebubbled is a clone of the classic Bubble Trouble game, in which the character 
 
 Rebubbled will be a single-window game. The user will be able to move left and right with the keyboard's arrows. Pressing on the spacebar will allow the user to shoot at the bubbles. The user can only shoot another harpoon after the previous harpoon has hit the top of the game's window.
 
-<img src="https://github.com/as6730/Galaga-Rebubbled/blob/master/assets/gif/galaga.gif" width=768 height=565 />
+<p align="center">
+  <img src="https://github.com/as6730/Galaga-Rebubbled/blob/master/assets/gif/galaga.gif" width=768 height=565 />
+</p>
 
 ### Timeline
 
