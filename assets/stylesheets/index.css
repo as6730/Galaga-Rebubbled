@@ -1,7 +1,6 @@
 .main {
   display: flex;
   justify-content: center;
-
 }
 
 .instructions {
@@ -53,5 +52,5 @@
 }
 
 p.spacebar.key {
-    width: 150px;
+  width: 150px;
 }

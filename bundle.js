@@ -257,6 +257,8 @@ let character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default *
 let score = 0;
 let lives = 3;
 let isGamePaused = true;
+let isBetweenLevels = false;
+let alreadyDraw = true;
 
 // user controllers
 let rightPressed = false;
@@ -346,6 +348,17 @@ function drawLevel(ctx) {
   ctx.fillText(`Level ${level}`, canvas.width - 90, 20);
 }
 
+// get ready for next level
+function drawGetReady(ctx) {
+  ctx.font = '35px courier';
+  ctx.fillStyle = '#FFD700';
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = '#FFD700';
+  ctx.lineWidth = 1;
+  ctx.fillText(`Get Ready!`, canvas.width / 2 - 65, canvas.height / 2);
+}
+
+
 let level = 0;
 let bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
 // load next level
@@ -354,10 +367,25 @@ function loadNextLevelIfFinished(ctx) {
     level += 1;
     bubbles = Object(__WEBPACK_IMPORTED_MODULE_5__levels_js__["a" /* default */])()[level];
     character = new __WEBPACK_IMPORTED_MODULE_7__spaceship_js__["a" /* default */](canvas);
+
+    // pause game in between levels
+    isBetweenLevels = true;
+    alreadyDraw = false;
+    setTimeout(function () {
+      isBetweenLevels = false;
+    }, 4000)
   }
 }
 
 function draw() {
+  // check if character is between levels
+  if (isBetweenLevels) {
+    if (!alreadyDraw) {
+      drawGetReady(ctx);
+      alreadyDraw = true;
+    }
+    return;
+  }
 
   // event listeners
   if (!isGamePaused) {
@@ -397,6 +425,7 @@ function draw() {
       return;
     } else {
       loadNextLevelIfFinished(ctx);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
     // check bubble collision with laser
