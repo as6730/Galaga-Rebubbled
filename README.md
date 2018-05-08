@@ -1,5 +1,9 @@
 # Galaga: Rebubbled
 
+[Live Demo][gitpages]
+
+[gitpages]: https://as6730.github.io/Galaga-Rebubbled/
+
 ### Game Overview and Logic
 
 Rebubbled is a clone of the classic Bubble Trouble game, in which the character attempts to destroy all the perilous bubbles by shooting them with a dividing them into smaller components and eventually destroying them all together. If the character is touched by a bubble, the character loses a life (out of three).
